@@ -19,6 +19,7 @@ class LLVM::Global {...}
 class LLVM::Function {...}
 class LLVM::Generic {...}
 class LLVM::Instruction {...}
+class LLVM::Intrinsic {...}
 class LLVM::Metadata {...}
 class LLVM::Module {...}
 class LLVM::Type {...}
