@@ -33,6 +33,7 @@ class LLVM::Type {...}
 	"lib/LLVM/Function.pm6".&slurp ~ "\n" ~
 	"lib/LLVM/Generic.pm6".&slurp ~ "\n" ~
 	"lib/LLVM/Instruction.pm6".&slurp ~ "\n" ~
+	"lib/LLVM/Intrinsic.pm6".&slurp ~ "\n" ~
 	"lib/LLVM/Metadata.pm6".&slurp ~ "\n" ~
 	"lib/LLVM/Module.pm6".&slurp ~ "\n" ~
 	"lib/LLVM/Type.pm6".&slurp

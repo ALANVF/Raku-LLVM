@@ -89,7 +89,12 @@ class LLVM::Context is export {
 		return LLVM::Value.new: LLVMConstStructInContext($!raw, CArray[LLVMValueRef].new(@values>>.raw), @values.elems, so $packed)
 	}
 
-	#sub LLVMIntrinsicGetType(LLVMContextRef, size_t, CArray[LLVMTypeRef], size_t)          returns LLVMTypeRef
+	multi method intrinsic(Int $id, @params where {.all ~~ LLVM::Type}) {
+		return LLVM::Type.new: LLVMIntrinsicGetType($!raw, $id, CArray[LLVMTypeRef].new(@params>>.raw), @params.elems)
+	}
+	multi method intrinsic(Str $name, @params where {.all ~~ LLVM::Type}) {
+		return LLVM::Type.new: LLVMIntrinsicGetType($!raw, LLVMLookupIntrinsicID($name, $name.chars), CArray[LLVMTypeRef].new(@params>>.raw), @params.elems)
+	}
 
 	#sub LLVMMDStringInContext2(LLVMContextRef, Str, size_t)                   returns LLVMMetadataRef
 	#sub LLVMMDNodeInContext2(LLVMContextRef, CArray[LLVMMetadataRef], size_t) returns LLVMMetadataRef

@@ -187,7 +187,12 @@ class LLVM::Module is export {
 	#sub LLVMGetFirstGlobalIFunc(LLVMModuleRef)                                            returns LLVMValueRef
 	#sub LLVMGetLastGlobalIFunc(LLVMModuleRef)                                             returns LLVMValueRef
 	
-	#sub LLVMGetIntrinsicDeclaration(LLVMModuleRef, size_t, CArray[LLVMTypeRef], size_t)    returns LLVMValueRef
+	multi method intrinsic(Int $id, @params where {.all ~~ LLVM::Type}) {
+		return LLVM::Intrinsic.new: LLVMGetIntrinsicDeclaration($!raw, $id, CArray[LLVMTypeRef].new(@params>>.raw), @params.elems)
+	}
+	multi method intrinsic(Str $name, @params where {.all ~~ LLVM::Type}) {
+		return LLVM::Intrinsic.new: LLVMGetIntrinsicDeclaration($!raw, LLVMLookupIntrinsicID($name, $name.chars), CArray[LLVMTypeRef].new(@params>>.raw), @params.elems)
+	}
 	
 	#sub LLVMCreateModuleProviderForExistingModule(LLVMModuleRef) returns LLVMModuleProviderRef
 	#sub LLVMCreateFunctionPassManagerForModule(LLVMModuleRef)        returns LLVMPassManagerRef
