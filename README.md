@@ -1,6 +1,8 @@
 # Raku-LLVM
 Raku bindings for the LLVM that go beyond the C API (like it uses raku stuff).
 
+(actually uh this doesn't seem to be working right now?)
+
 Make sure that you have LLVM 7 installed (for now at least).
 
 Todo:
