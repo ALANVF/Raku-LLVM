@@ -6,7 +6,7 @@ use NativeHelpers::Blob;
 use LLVMC;
 use MONKEY-SEE-NO-EVAL;
 
-my $dir = (callframe(0).file ~~ /^(.+)'/'/)[0].Str;
+BEGIN my $dir = ($?FILE ~~ /^(.+)'/'/)[0].Str;
 
 EVAL "$dir/LLVM/Enums.pm6".&slurp;
 
