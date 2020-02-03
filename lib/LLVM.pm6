@@ -6,7 +6,9 @@ use NativeHelpers::Blob;
 use LLVMC;
 use MONKEY-SEE-NO-EVAL;
 
-EVAL "lib/LLVM/Enums.pm6".&slurp;
+my $dir = (callframe(0).file ~~ /^(.+)'/'/)[0].Str;
+
+EVAL "$dir/LLVM/Enums.pm6".&slurp;
 
 EVAL('
 class LLVM::Value {...}
@@ -24,18 +26,18 @@ class LLVM::Metadata {...}
 class LLVM::Module {...}
 class LLVM::Type {...}
 ' ~
-	"lib/LLVM/Value.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Attribute.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/BasicBlock.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Builder.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Context.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Engine.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Global.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Function.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Generic.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Instruction.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Intrinsic.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Metadata.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Module.pm6".&slurp ~ "\n" ~
-	"lib/LLVM/Type.pm6".&slurp
+	"$dir/LLVM/Value.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Attribute.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/BasicBlock.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Builder.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Context.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Engine.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Global.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Function.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Generic.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Instruction.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Intrinsic.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Metadata.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Module.pm6".&slurp ~ "\n" ~
+	"$dir/LLVM/Type.pm6".&slurp
 );
