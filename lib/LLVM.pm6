@@ -6,7 +6,7 @@ use NativeHelpers::Blob;
 use LLVMC;
 use MONKEY-SEE-NO-EVAL;
 
-BEGIN my $dir = BEGIN say $?FILE.IO.parent(1).path;
+BEGIN my $dir = BEGIN say $?FILE.IO.parent.CWD;
 
 EVAL "$dir/LLVM/Enums.pm6".&slurp;
 
