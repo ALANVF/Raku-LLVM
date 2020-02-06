@@ -437,65 +437,247 @@ class LLVM::Value is export {
 	#sub LLVMGetElementAsConstant(LLVMValueRef, size_t) returns LLVMValueRef
 
 	#= Constants
-	#sub LLVMGetConstOpcode(LLVMValueRef) returns int32
-	#sub LLVMConstNeg(LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNSWNeg(LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNUWNeg(LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstFNeg(LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNot(LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstAdd(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNSWAdd(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNUWAdd(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstFAdd(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstSub(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNSWSub(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNUWSub(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstFSub(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstMul(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNSWMul(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstNUWMul(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstFMul(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstUDiv(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstExactUDiv(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstSDiv(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstExactSDiv(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstFDiv(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstURem(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstSRem(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstFRem(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstAnd(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstOr(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstXor(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstShl(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstLShr(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstAShr(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstGEP(LLVMValueRef, CArray[LLVMValueRef], size_t) returns LLVMValueRef
-	#sub LLVMConstInBoundsGEP(LLVMValueRef, CArray[LLVMValueRef], size_t) returns LLVMValueRef
-	#sub LLVMConstTrunc(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstSExt(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstZExt(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstFPTrunc(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstFPExt(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstUIToFP(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstSIToFP(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstFPToUI(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstFPToSI(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstPtrToInt(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstIntToPtr(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstBitCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstAddrSpaceCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstZExtOrBitCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstSExtOrBitCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstTruncOrBitCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstPointerCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstIntCast(LLVMValueRef, LLVMTypeRef, int32) returns LLVMValueRef
-	#sub LLVMConstFPCast(LLVMValueRef, LLVMTypeRef) returns LLVMValueRef
-	#sub LLVMConstSelect(LLVMValueRef, LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstExtractElement(LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstInsertElement(LLVMValueRef, LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstShuffleVector(LLVMValueRef, LLVMValueRef, LLVMValueRef) returns LLVMValueRef
-	#sub LLVMConstExtractValue(LLVMValueRef, CArray[size_t], size_t) returns LLVMValueRef
-	#sub LLVMConstInsertValue(LLVMValueRef, LLVMValueRef, CArray[size_t], size_t) returns LLVMValueRef
+	method const-opcode {
+		return LLVM::Opcode(LLVMGetConstOpcode($!raw))
+	}
+
+	method const-neg {
+		return LLVM::Value.new: LLVMConstNeg($!raw)
+	}
+
+	method const-nsw-neg {
+		return LLVM::Value.new: LLVMConstNSWNeg($!raw)
+	}
+
+	method const-nuw-neg {
+		return LLVM::Value.new: LLVMConstNUWNeg($!raw)
+	}
+
+	method const-fneg {
+		return LLVM::Value.new: LLVMConstFNeg($!raw)
+	}
+
+	method const-not {
+		return LLVM::Value.new: LLVMConstNot($!raw)
+	}
+
+	method const-add(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstAdd($!raw, $value.raw)
+	}
+
+	method const-nsw-add(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstNSWAdd($!raw, $value.raw)
+	}
+
+	method const-nuw-add(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstNUWAdd($!raw, $value.raw)
+	}
+
+	method const-fadd(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstFAdd($!raw, $value.raw)
+	}
+
+	method const-sub(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstSub($!raw, $value.raw)
+	}
+
+	method const-nsw-sub(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstNSWSub($!raw, $value.raw)
+	}
+
+	method const-nuw-sub(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstNUWSub($!raw, $value.raw)
+	}
+
+	method const-fsub(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstFSub($!raw, $value.raw)
+	}
+	
+	method const-mul(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstMul($!raw, $value.raw)
+	}
+
+	method const-nsw-mul(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstNSWMul($!raw, $value.raw)
+	}
+
+	method const-nuw-mul(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstNUWMul($!raw, $value.raw)
+	}
+
+	method const-fmul(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstFMul($!raw, $value.raw)
+	}
+
+	method const-udiv(LLVM::Value $value, :$exact) {
+		if $exact {
+			return LLVM::Value.new: LLVMConstExactUDiv($!raw, $value.raw)
+		} else {
+			return LLVM::Value.new: LLVMConstUDiv($!raw, $value.raw)
+		}
+	}
+
+	method const-sdiv(LLVM::Value $value, :$exact) {
+		if $exact {
+			return LLVM::Value.new: LLVMConstExactSDiv($!raw, $value.raw)
+		} else {
+			return LLVM::Value.new: LLVMConstSDiv($!raw, $value.raw)
+		}
+	}
+
+	method const-fdiv(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstFDiv($!raw, $value.raw)
+	}
+	
+	method const-urem(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstURem($!raw, $value.raw)
+	}
+
+	method const-srem(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstSRem($!raw, $value.raw)
+	}
+
+	method const-frem(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstFRem($!raw, $value.raw)
+	}
+
+	method const-and(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstAnd($!raw, $value.raw)
+	}
+
+	method const-or(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstOr($!raw, $value.raw)
+	}
+
+	method const-xor(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstXor($!raw, $value.raw)
+	}
+
+	method const-shl(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstShl($!raw, $value.raw)
+	}
+
+	method const-lshr(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstLShr($!raw, $value.raw)
+	}
+
+	method const-ashr(LLVM::Value $value) {
+		return LLVM::Value.new: LLVMConstAShr($!raw, $value.raw)
+	}
+
+	method const-icmp(LLVM::Value $with, LLVM::IntPredicate $cmp) {
+		return LLVM::Value.new: LLVMConstICmp($cmp.Int, $!raw, $with.raw)
+	}
+
+	method const-fcmp(LLVM::Value $with, LLVM::RealPredicate $cmp) {
+		return LLVM::Value.new: LLVMConstFCmp($cmp.Int, $!raw, $with.raw)
+	}
+	
+	method const-gep(@indices where {.all ~~ LLVM::Value}) {
+		return LLVM::Value.new: LLVMConstGEP($!raw, CArray[LLVMValueRef].new(@indices>>.raw), @indices.elems)
+	}
+
+	method const-inbounds-gep(@indices where {.all ~~ LLVM::Value}) {
+		return LLVM::Value.new: LLVMConstInBoundsGEP($!raw, CArray[LLVMValueRef].new(@indices>>.raw), @indices.elems)
+	}
+	
+	method const-trunc(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstTrunc($!raw, $type.raw)
+	}
+
+	method const-sext(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstSExt($!raw, $type.raw)
+	}
+
+	method const-zext(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstZExt($!raw, $type.raw)
+	}
+
+	method const-fp-trunc(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstFPTrunc($!raw, $type.raw)
+	}
+
+	method const-fp-ext(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstFPExt($!raw, $type.raw)
+	}
+
+	method const-ui-to-fp(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstUIToFP($!raw, $type.raw)
+	}
+
+	method const-si-to-fp(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstSIToFP($!raw, $type.raw)
+	}
+
+	method const-fp-to-ui(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstFPToUI($!raw, $type.raw)
+	}
+
+	method const-fp-to-si(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstFPToSI($!raw, $type.raw)
+	}
+
+	method const-ptr-to-int(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstPtrToInt($!raw, $type.raw)
+	}
+
+	method const-int-to-ptr(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstIntToPtr($!raw, $type.raw)
+	}
+	
+	method const-bit-cast(LLVM::Type $type, :$zext, :$sext, :$trunc) {
+		with $zext {
+			return LLVM::Value.new: LLVMConstZExtOrBitCast($!raw, $type.raw)
+		} orwith $sext {
+			return LLVM::Value.new: LLVMConstSExtOrBitCast($!raw, $type.raw)
+		} orwith $trunc {
+			return LLVM::Value.new: LLVMConstTruncOrBitCast($!raw, $type.raw)
+		} else {
+			return LLVM::Value.new: LLVMConstBitCast($!raw, $type.raw)
+		}
+	}
+
+	method const-addr-space-cast(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstAddrSpaceCast($!raw, $type.raw)
+	}
+
+	method const-ptr-cast(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstPointerCast($!raw, $type.raw)
+	}
+
+	method const-int-cast(LLVM::Type $type, :$signed = True) {
+		return LLVM::Value.new: LLVMConstIntCast($!raw, $type.raw, so $signed)
+	}
+
+	method const-fp-cast(LLVM::Type $type) {
+		return LLVM::Value.new: LLVMConstFPCast($!raw, $type.raw)
+	}
+
+	method const-select(LLVM::Value $true, LLVM::Value $false) {
+		return LLVM::Value.new: LLVMConstSelect($!raw, $true.raw, $false.raw)
+	}
+	
+	method const-extract-elem(LLVM::Value $index) {
+		return LLVM::Value.new: LLVMConstExtractElement($!raw, $index.raw)
+	}
+
+	method const-insert-elem(LLVM::Value $value, LLVM::Value $index) {
+		return LLVM::Value.new: LLVMConstInsertElement($!raw, $value.raw, $index.raw)
+	}
+
+	method const-shuffle-vec(LLVM::Value $vec, LLVM::Value $mask) {
+		return LLVM::Value.new: LLVMConstShuffleVector($!raw, $vec.raw, $mask.raw)
+	}
+
+	method const-extract-val(@indices where {.all ~~ Int}) {
+		return LLVM::Value.new: LLVMConstExtractValue($!raw, CArray[size_t].new(@indices), @indices.elems)
+	}
+
+	method const-insert-val(LLVM::Value $value, @indices where {.all ~~ Int}) {
+		return LLVM::Value.new: LLVMConstExtractValue($!raw, $value.raw, CArray[size_t].new(@indices), @indices.elems)
+	}
+	
+	# move this to LLVM::Function
 	#sub LLVMBlockAddress(LLVMValueRef, LLVMBasicBlockRef) returns LLVMValueRef
 
 	#= IFuncs
@@ -2512,4 +2694,3 @@ class LLVM::Type is export {
 	#sub LLVMConstInBoundsGEP2(LLVMTypeRef, LLVMValueRef, CArray[LLVMValueRef], size_t) returns LLVMValueRef
 	#sub LLVMConstInlineAsm(LLVMTypeRef, Str, Str, int32, int32)                        returns LLVMValueRef
 }
-
