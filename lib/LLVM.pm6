@@ -794,7 +794,7 @@ class LLVM::BasicBlock is export {
 	}
 
 	method move-after(LLVM::BasicBlock $bb) {
-		LLVM::LLVMMoveBasicBlockAfter($!raw, $bb.raw)
+		LLVMMoveBasicBlockAfter($!raw, $bb.raw)
 	}
 
 	method head {
@@ -827,10 +827,14 @@ class LLVM::Builder is export {
 	##sub LLVMPositionBuilder(LLVMBuilderRef, LLVMBasicBlockRef, LLVMValueRef)
 	##sub LLVMPositionBuilderBefore(LLVMBuilderRef, LLVMValueRef)
 	##sub LLVMPositionBuilderAtEnd(LLVMBuilderRef, LLVMBasicBlockRef)
-	#sub LLVMGetInsertBlock(LLVMBuilderRef)                                                                  returns 	LLVMBasicBlockRef	
 	#sub LLVMClearInsertionPosition(LLVMBuilderRef)
 	#sub LLVMInsertIntoBuilder(LLVMBuilderRef, LLVMValueRef)
 	#sub LLVMInsertIntoBuilderWithName(LLVMBuilderRef, LLVMValueRef, Str)
+	
+	method current-block {
+		return LLVM::BasicBlock.new: LLVMGetInsertBlock($!raw)
+	}
+	
 	method move-to-end(LLVM::BasicBlock $bb) {
 		LLVMPositionBuilderAtEnd($!raw, $bb.raw)
 	}
@@ -1234,9 +1238,64 @@ class LLVM::Builder is export {
 	method atomic-cmp-xchg(LLVM::Value $ptr, LLVM::Value $cmp, LLVM::Value $new, LLVM::AtomicOrdering $success, LLVM::AtomicOrdering $failure, Bool :$single-thread!) {
 		return LLVM::Instruction.new: LLVMBuildAtomicCmpXchg($!raw, $ptr.raw, $cmp.raw, $new.raw, $success.Int, $failure.Int, $single-thread)
 	}
+
+	#= Helper methods
+	method current-func {
+		return self.current-block.parent
+	}
+
+	#= Experimental methods
+	method if(LLVM::Value $cond, &true, &false?) {
+		with &false {
+			my $true = self.current-func.blocks.push("");
+			my $false = self.current-func.blocks.push("");
+			my $end = self.current-func.blocks.push("");
+
+			$true.move-after(self.current-block);
+
+			self.br: $cond, $true, $false;
+
+			# true block
+			self.move-to-end($true);
+			
+			true self;
+
+			unless $true.tail.is-term {
+				self.br: $end;
+			}
+
+			# false block
+			self.move-to-end($false);
+
+			false self;
+
+			unless $false.tail.is-term {
+				self.br: $end
+			}
+
+			self.move-to-end($end);
+		} else {
+			my $true = self.current-func.blocks.push("");
+			my $end = self.current-func.blocks.push("");
+
+			$true.move-after(self.current-block);
+			
+			self.br: $cond, $true, $end;
+
+			# true block
+			self.move-to-end($true);
+			
+			true self;
+
+			
+			unless $true.tail.is-term {
+				self.br: $end
+			}
+
+			self.move-to-end($end);
+		}
+	}
 }
-
-
 
 #| Contexts
 
@@ -1791,6 +1850,7 @@ class LLVM::Function is LLVM::Global is export {
 		)
 	}
 
+	# should be in LLVM::Intrinsic?
 	method intrinsic-id {
 		return LLVMGetIntrinsicID($.raw)
 	}
@@ -2089,7 +2149,7 @@ class LLVM::Instruction is LLVM::Value is export {
 	}
 	
 	method is-term {
-		return LLVM::Value.new: LLVMIsATerminatorInst($.raw)
+		return so LLVMIsATerminatorInst($.raw)
 	}
 	
 	#= Attributes
